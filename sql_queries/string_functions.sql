@@ -135,3 +135,18 @@ ORDER BY release_year DESC;
 -- RTRIM('your_string_here', ['character']);
 -- BTRIM('your_string_here', ['character']);
 
+SELECT 
+  TRIM(
+    LEADING
+    FROM '     Amazing PostgreSQL'
+  ),
+  TRIM(
+    TRAILING
+    FROM 'Amazing PostgreSQL     '
+  ),
+  TRIM(
+     '     Amazing PostgreSQL     '
+  );
+
+-- Remove leading zeros from a string
+
