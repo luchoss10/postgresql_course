@@ -150,3 +150,86 @@ SELECT
 
 -- Remove leading zeros from a string
 
+
+SELECT 
+  TRIM(
+    LEADING '0'
+    FROM 
+    CAST (000123456789 AS TEXT)
+  ) AS trimmed_string;
+
+
+SELECT
+  LTRIM('     Amazing PostgreSQL') AS ltrimmed_string,
+  RTRIM('Amazing PostgreSQL     ') AS rtrimmed_string,
+  BTRIM('     Amazing PostgreSQL     ') AS btrimmed_string;
+
+
+
+-- LPAD and RPAD Functions
+-- ####################################
+
+/*
+  
+  LPAD function pads a string on the left to a specified length with a sequence of characters.
+
+  RPAD function pads a string on the right to a specified length with a sequence of characters.
+
+*/
+
+-- LPAD('your_string_here', length, 'character_sequence');
+
+-- RPAD('your_string_here', length, 'character_sequence');
+
+
+-- The fill argument is optional, if you omit the fill arcgument, it's default value is a space.
+
+SELECT 
+  LPAD('PostgreSQL', 20, '*') AS left_padded_string, -- '*******PostgreSQL'
+  RPAD('PostgreSQL', 20, '*') AS right_padded_string; -- 'PostgreSQL*******'
+
+  SELECT LPAD('1111', 6, 'A') AS left_padded_string, -- 'AA1111'
+
+
+-- LENGTH function
+-- ####################################
+
+
+-- length return the number of characters or bytes in a string.
+
+
+-- LENGTH('your_string_here');
+
+SELECT LENGTH('PostgreSQL') AS string_length; -- 11
+
+
+SELECT LENGTH('') AS string_length; -- 0
+SELECT LENGTH(' ') AS string_length; -- 1
+
+
+SELECT LENGTH(NULL) AS string_length; -- NULL
+
+-- POSITION function
+-- ####################################
+
+
+/*
+
+  1. PostgreSQL's POSITION function returns the location of a substring within a string.
+
+  2. POSITION('substring' IN 'string');
+
+  3. return an integer that represents the location of the substring within the string.
+
+  4. return the first instance of the substring within the string.
+
+  5. searches for the substring in a case-sensitive manner.
+
+*/
+
+SELECT POSITION('SQL' IN 'PostgreSQL') AS position; -- 6
+
+SELECT POSITION('is ' IN 'This is a computer') AS position; -- 3
+
+
+
