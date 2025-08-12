@@ -231,5 +231,95 @@ SELECT POSITION('SQL' IN 'PostgreSQL') AS position; -- 6
 
 SELECT POSITION('is ' IN 'This is a computer') AS position; -- 3
 
+SELECT POSITION('A' IN 'KlickAnalytics') AS position; -- 6
+
+-- STRPOS function
+-- ####################################
+
+-- function is used to find the position, from where the substring is being matched within the string.
+
+-- STRPOS('string', 'substring');
+
+SELECT STRPOS('World Bank', 'Bank') AS position; -- 7
+
+-- Lets display the first_name, last_name and the position of a specific substring 'on', wich must exists within the column lasta_name from directors.
 
 
+SELECT
+  first_name,
+  last_name,
+FROM directors
+WHERE STRPOS(last_name, 'on') > 0 
+
+
+/* 
+  Difference between STRPOS and POSITION functions
+
+  1. Those functions do the exactly same thing and differ only in syntax. Documentation for strpos() says; Location of specified substring(same as position(substring IN string), but note the reserved argument order).
+
+  2. Reason why they both exist and differ only in syntax is that POSITION(str1 IN str2) is defined by ANSI SQL standard.
+
+  If POSTGRESQL had only strpos() it would not be able to run ANSI SQL queries and scripts.
+
+*/
+
+
+-- SUBSTRING function
+-- ####################################
+
+/* 
+  1. Function allows you to extract a substring from a string.
+
+  2. SUBSTRING('your_string_here' FROM start_position FOR length);
+    SUBSTRING ('your_string_here', start_position, length);
+
+  3. The first position in string always starts from 1.
+*/
+
+
+SELECT SUBSTRING('What a wonderful world' FROM 1 FOR 4) AS substring; -- 'What'
+
+SELECT SUBSTRING('What a wonderful world', FROM 8 FOR 10) AS substring; -- 'wonderful'
+
+
+SELECT SUBSTRING('What a wonderful world' FOR 7) AS substring; -- 'What a '
+
+-- Get initials from directos table
+
+
+SELECT 
+  first_name,
+  last_name,
+  SUBSTRING(first_name FROM 1 FOR 1) AS first_name_initial,
+  SUBSTRING(last_name FROM 1 FOR 1) AS last_name_initial
+FROM directors
+ORDER BY first_name_initial, last_name_initial;
+
+-- REPEAT function
+-- ####################################
+-- Repeats a string a specified number of times.
+
+-- REPEAT('your_string_here', n);
+
+SELECT REPEAT('PostgreSQL ', 3) AS repeated_string; -- 'PostgreSQL PostgreSQL PostgreSQL '
+
+
+-- REPLACE function
+-- ####################################
+-- Replace function replaces all ocurrences of a specified string.
+
+-- REPLACE ('your_string_here', 'string_to_be_replaced', 'replacement_string');
+
+
+SELECT REPLACE('ABC XYZ', 'X', '1') AS replaced_string; -- 'ABC 1YZ'
+
+
+SELECT REPLACE('What a wonderful world', 'a wonderful', 'an amazing') AS replaced_string; -- 'What an amazing world'
+
+SELECT REPLACE('I like dogs', 'dogs', 'cats') AS replaced_string; -- 'I like cats'
+
+
+SELECT REPLACE('111AAA111', '1', 'A') AS replaced_string; -- 'AAAAAA'
+
+
+SELECT REPLACE('111AAA111', '1', 'A') AS replaced_string; -- 'AAAAAA'
